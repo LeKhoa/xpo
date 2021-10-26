@@ -1,26 +1,59 @@
-<h2>Log in</h2>
+<div class="container-fluid vh-100 text-center sign_in">
+  <div class="col-md-10 h-100 mx-auto">
+    <div class="bg h-100">
+      <div class="form col-md-4 py-4 px-5 mx-auto bg-white border rounded-3">
+        <h1>Let's Get Started</h1>
+        <span> Sign in to continue to Xponential. </span>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= render 'shared/flash' %>
+          <div class="field input-group mt-5">
+            <span class="input-group-text bg-white" id="basic-addon2">
+              <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 1.26177C12 0.601768 11.46 0.0617676 10.8 0.0617676H1.2C0.54 0.0617676 0 0.601768 0 1.26177V8.46177C0 9.12177 0.54 9.66177 1.2 9.66177H10.8C11.46 9.66177 12 9.12177 12 8.46177V1.26177ZM10.8 1.26177L6 4.26177L1.2 1.26177H10.8ZM10.8 8.46177H1.2V2.46177L6 5.46177L10.8 2.46177V8.46177Z" fill="#A9A9A9"/>
+              </svg>
+            </span>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Email' %>
+          </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+          <div class="field input-group mt-3">
+            <span class="input-group-text bg-white" id="basic-addon3">
+              <svg width="12" height="17" viewBox="0 0 12 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.5 5.75806H9.75V4.25806C9.75 2.18806 8.07 0.508057 6 0.508057C3.93 0.508057 2.25 2.18806 2.25 4.25806V5.75806H1.5C0.675 5.75806 0 6.43306 0 7.25806V14.7581C0 15.5831 0.675 16.2581 1.5 16.2581H10.5C11.325 16.2581 12 15.5831 12 14.7581V7.25806C12 6.43306 11.325 5.75806 10.5 5.75806ZM3.75 4.25806C3.75 3.01306 4.755 2.00806 6 2.00806C7.245 2.00806 8.25 3.01306 8.25 4.25806V5.75806H3.75V4.25806ZM10.5 14.7581H1.5V7.25806H10.5V14.7581ZM6 12.5081C6.825 12.5081 7.5 11.8331 7.5 11.0081C7.5 10.1831 6.825 9.50806 6 9.50806C5.175 9.50806 4.5 10.1831 4.5 11.0081C4.5 11.8331 5.175 12.5081 6 12.5081Z" fill="#A9A9A9"/>
+              </svg>
+            </span>
+            <%= f.password_field :password, autocomplete: "current-password", class: 'form-control', placeholder: 'Password' %>
+          </div>
+
+          <div class='row align-items-end'>
+            <div class='col-md-6 text-start'>
+              <% if devise_mapping.rememberable? %>
+                <div class="field mt-3">
+                  <%= f.check_box :remember_me, class: 'form-check-input shadow-none' %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end %>
+            </div>
+            <div class='col-md-6 text-end'>
+              <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.10283 3.9692H7.57771V2.91895C7.57771 1.46961 6.40143 0.293335 4.95209 0.293335C3.50275 0.293335 2.32647 1.46961 2.32647 2.91895V3.9692H1.80135C1.22371 3.9692 0.751099 4.44181 0.751099 5.01945V10.2707C0.751099 10.8483 1.22371 11.3209 1.80135 11.3209H8.10283C8.68046 11.3209 9.15308 10.8483 9.15308 10.2707V5.01945C9.15308 4.44181 8.68046 3.9692 8.10283 3.9692ZM4.95209 8.69531C4.37445 8.69531 3.90184 8.2227 3.90184 7.64507C3.90184 7.06743 4.37445 6.59482 4.95209 6.59482C5.52972 6.59482 6.00233 7.06743 6.00233 7.64507C6.00233 8.2227 5.52972 8.69531 4.95209 8.69531ZM6.57997 3.9692H3.3242V2.91895C3.3242 2.02099 4.05413 1.29107 4.95209 1.29107C5.85005 1.29107 6.57997 2.02099 6.57997 2.91895V3.9692Z" fill="#31297E"/>
+              </svg>
+
+              <%= link_to "Forgot password?", new_password_path(resource_name), class: "text-decoration-none text-purple" %>
+            </div>
+          </div>
+
+          <div class="actions mt-3">
+            <%= f.submit 'SIGN IN', class: 'btn btn-md bg-purple text-white' %>
+          </div>
+        <% end %>
+
+        <div class="mt-3">
+          <span> Don't have an account? </span>
+          <%= link_to 'Sign up', new_user_registration_path, class: "text-decoration-none" %>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>

@@ -1,5 +1,8 @@
 // app/javascript/stylesheets/application.scss
 
 $font-family-base: 'Poppins';
+$enable-negative-margins: true;
 
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
+
+@import './devise'
