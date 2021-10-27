@@ -30,12 +30,14 @@ body {
       font-size: 13px;
       line-height: 17px;
     }
+
     .price {
       font-family: 'Rubik';
       font-size: 24px;
       line-height: 29px;
       color: #131031;
     }
+
     .volume {
       font-family: 'Verdana';
       font-size: 9px;
@@ -61,6 +63,64 @@ body {
   }
 }
 
-.balance {
+.transactions {
+  .title {
+    font-family: 'Poppins';
+    font-size: 17px;
+    line-height: 22px;
+  }
 
+  .hash {
+    font-size: 14px;
+    line-height: 21px;
+    color: #FFCC6A;
+  }
+
+  .date {
+    font-size: 12px;
+    line-height: 18px;
+    color: #451089;
+  }
+
+  .pagination {
+    color: #9FA2B4;
+  }
+
+  .filter-btn, .sort-btn {
+    padding: 0;
+  }
+}
+
+.payment {
+
+  .back-title {
+    color: #788995;
+  }
+
+  .card-item {
+    font-size: 12px;
+    line-height: 18px;
+    color: #788995;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 24px;
+    color: #788995;
+  }
+
+  .cart {
+    .item {
+      font-size: 14px;
+      line-height: 21px;
+      color: #788995;
+    }
+
+    .text {
+      font-family: 'Poppins';
+      font-size: 16px;
+      line-height: 24px;
+      color: #788995;
+    }
+  }
 }

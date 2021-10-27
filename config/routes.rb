@@ -6,4 +6,6 @@ Rails.application.routes.draw do
 
   get :profile, to: 'home#profile'
   get :support, to: 'home#support'
+  get :transactions, to: 'home#transactions'
+  get :payment, to: 'home#payment'
 end

@@ -7,4 +7,10 @@ class HomeController < ApplicationController
 
   def support
   end
+
+  def transactions
+  end
+
+  def payment
+  end
 end
