@@ -1,0 +1,25 @@
+.menu {
+  ul {
+    list-style-type: none;
+
+    li {
+      display: block;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    li:hover {
+      background-color: white;
+      a {
+        color: #451089;
+      }
+    }
+  }
+
+  a {
+    color: #6A5C7B;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 24px;
+  }
+}

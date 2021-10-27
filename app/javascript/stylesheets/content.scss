@@ -1,0 +1,56 @@
+body {
+  background: #F1F5F8;
+}
+
+.dashboard {
+  .title {
+    font-family: 'IBM Plex Sans Condensed';
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 21px;
+  }
+
+  .f-rubik {
+    font-family: 'Rubik';
+  }
+
+  .balance {
+    .title {
+      color: #5D69E9;
+      font-size: 13px;
+    }
+    .amount {
+      font-family: 'Rubik';
+      font-size: 24px;
+    }
+  }
+
+  .rate {
+    .pair {
+      font-size: 13px;
+      line-height: 17px;
+    }
+    .price {
+      font-family: 'Rubik';
+      font-size: 24px;
+      line-height: 29px;
+      color: #131031;
+    }
+    .volume {
+      font-family: 'Verdana';
+      font-size: 9px;
+    }
+  }
+}
+
+.profile {
+
+}
+
+.support {
+
+}
+
+.balance {
+
+}

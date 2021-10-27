@@ -5,4 +5,9 @@ $enable-negative-margins: true;
 
 @import '~bootstrap/scss/bootstrap';
 
-@import './devise'
+@import './base';
+@import './devise';
+@import './content';
+@import './top';
+@import './bottom';
+@import './menu';
