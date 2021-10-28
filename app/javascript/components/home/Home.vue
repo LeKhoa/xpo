@@ -1,11 +1,15 @@
 <template>
-  <div id="app">
-    <p>{{ message }}</p>
+  <div class="home">
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
 <script>
+
 export default {
+  components: {
+  },
+
   data: function () {
     return {
       message: "Hello Vue!"
@@ -14,9 +18,7 @@ export default {
 }
 </script>
 
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
+<style scoped lang="scss">
+.home {
 }
 </style>

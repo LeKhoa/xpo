@@ -20,13 +20,18 @@
 
   <body>
     <%= render "/shared/dashboard/top" %>
-    <div class="row m-0">
-      <div class="col-md-2">
-        <%= render "/shared/dashboard/menu" %>
+    <% if false %>
+      <div class="row m-0">
+        <div class="col-md-2">
+          <%= render "/shared/dashboard/menu" %>
+        </div>
+        <div class="col-md-10">
+          <%= yield %>
+        </div>
       </div>
-      <div class="col-md-10">
-        <%= yield %>
-      </div>
+    <% end %>
+
+    <%= yield %>
     <%= render "/shared/dashboard/bottom" %>
   </body>
 </html>

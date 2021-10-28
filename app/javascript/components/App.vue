@@ -1,17 +1,27 @@
 <template>
-  <Home />
+  <div id="app">
+    <div class="row m-0">
+      <div class="col-md-2">
+        <Menu />
+      </div>
+      <div class="col-md-10">
+        <Home />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 
 // Home
 import Home from './home/Home.vue'
+import Menu from './home/Menu.vue'
 
 import { mapState, mapActions } from 'vuex';
 
 export default {
   components: {
-    Home,
+    Menu, Home,
   },
 
   props: ['dataCurrentUser'],
@@ -25,9 +35,6 @@ export default {
   methods: {
     ...mapActions(['setCurrentUser']),
 
-    nextStep() {
-      this.step++;
-    },
   },
 
   computed: {
@@ -40,6 +47,6 @@ export default {
 }
 </script>
 
-<style scoped="scss">
+<style scoped lang="scss">
 
 </style>
