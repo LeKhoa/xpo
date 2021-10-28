@@ -15,6 +15,12 @@ const routes = [
     component: Home,
     children: [
       {
+        path: '',
+        name: 'root',
+        component: Dashboard,
+      },
+
+      {
         path: 'dashboard',
         name: 'dashboard',
         component: Dashboard,
