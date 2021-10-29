@@ -38,10 +38,10 @@
         </div>
 
         <div class="pagination row align-items-center justify-content-end">
-          <div class="col-md-2 text-end">
+          <div class="col-md-2 col-6 text-end">
             <span> 1-8 of 55 </span>
           </div>
-          <div class="col-md-2 text-end">
+          <div class="col-md-2 col-6 text-end">
             <button class="btn">
               <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7.62557 13.875L1.90615 7.94442C1.86879 7.90568 1.86879 7.84432 1.90615 7.80558L7.62557 1.875" stroke="#9FA2B4" stroke-width="2" stroke-linecap="round"/>

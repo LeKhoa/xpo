@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="content">
     <router-view :key="$route.fullPath" />
   </div>
 </template>
@@ -19,6 +19,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home {
+.content {
+
 }
 </style>

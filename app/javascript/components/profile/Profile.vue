@@ -1,6 +1,6 @@
 <template>
   <div class="profile p-3">
-    <div class="rounded shadow bg-white p-5">
+    <div class="content rounded shadow bg-white p-5">
       <div class="col-md-6">
         <span class="title mt-3"> john@doe.com </span>
 
@@ -60,8 +60,12 @@ export default {
 }
 </script>
 
-<style scoped="scss">
+<style scoped lang="scss">
 .profile {
-
+  .content {
+    @media only screen and (max-width: 575px) {
+      padding: 30px 10px !important;
+    }
+  }
 }
 </style>

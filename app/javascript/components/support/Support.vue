@@ -1,6 +1,6 @@
 <template>
   <div class="support p-3">
-    <div class="rounded shadow bg-white p-5">
+    <div class="content rounded shadow bg-white p-5">
       <div class="col-md-6">
         <span class="title mt-3"> loremipsum@lorum.ipsum </span>
         <input type="text" placeholder="subject" class="mt-4 form-control">
@@ -27,6 +27,10 @@ export default {
 
 <style scoped lang="scss">
 .support {
-
+  .content {
+    @media only screen and (max-width: 575px) {
+      padding: 30px 10px !important;
+    }
+  }
 }
 </style>

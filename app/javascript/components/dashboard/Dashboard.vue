@@ -1,8 +1,8 @@
 <template>
   <div class="dashboard">
     <div class="row m-0 p-3">
-      <div class="col-md-4 ps-0 pe-2">
-        <div class="rounded shadow bg-white p-5">
+      <div class="left col-md-4 ps-0 pe-2">
+        <div class="content rounded shadow bg-white p-5">
           <div class="pb-5">
             <label> Amount </label>
             <div class="input-group mt-2">
@@ -26,17 +26,17 @@
           </div>
 
           <div class="row actions pt-4 mt-5">
-            <div class="col-md-6">
+            <div class="col-md-6 col-6">
               <button class="btn btn-md bg-purple text-white w-100"> Deposit </button>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-6">
               <button class="btn btn-md bg-purple text-white w-100"> Widthdraw </button>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-8 ps-2 pe-0">
+      <div class="right col-md-8 ps-2 pe-0">
         <div class="rounded shadow bg-white h-100">
           <div class="row h-100 m-0">
             <div class="col-md-5 d-flex flex-column justify-content-between assets p-2 pb-3">
@@ -78,7 +78,7 @@
 
     <div class="rate px-3 mt-3">
       <div class="row m-0 justify-content-between rounded shadow bg-white p-3">
-        <div class="col-md-2 text-center border-end">
+        <div class="item col-md-2 text-center border-end">
           <div class="pair">
             <span> ZRX | BTC </span> <span class="text-danger"> -2.07% </span>
           </div>
@@ -86,7 +86,7 @@
           <div class="volume mt-1"> Volume 65,908 BTC </div>
         </div>
 
-        <div class="col-md-2 text-center border-end">
+        <div class="item col-md-2 text-center border-end">
           <div class="pair">
             <span> ETH | BTC </span> <span class="text-success"> +0.47% </span>
           </div>
@@ -94,7 +94,7 @@
           <div class="volume mt-1"> Volume 12,234 BTC </div>
         </div>
       
-        <div class="col-md-2 text-center border-end">
+        <div class="item col-md-2 text-center border-end">
           <div class="pair">
             <span> LTC | BTC </span> <span class="text-success"> +1.28% </span>
           </div>
@@ -102,7 +102,7 @@
           <div class="volume mt-1"> Volume 34,601 BTC </div>
         </div>
 
-        <div class="col-md-2 text-center border-end">
+        <div class="item col-md-2 text-center border-end">
           <div class="pair">
             <span> ETC | BTC </span> <span class="text-danger"> -0.44%  </span>
           </div>
@@ -110,7 +110,7 @@
           <div class="volume mt-1"> Volume 67,601 BTC </div>
         </div>
       
-        <div class="col-md-2 text-center border-end">
+        <div class="item col-md-2 text-center border-end">
           <div class="pair">
             <span> BCH | BTC </span> <span class="text-success"> +0.43% </span>
           </div>
@@ -118,7 +118,7 @@
           <div class="volume mt-1"> Volume 87,601 BTC </div>
         </div>
 
-        <div class="col-md-2 text-center border-end">
+        <div class="item col-md-2 text-center border-end">
           <div class="pair">
             <span> XRP | BTC </span> <span class="text-danger"> -0.54% </span>
           </div>
@@ -141,7 +141,36 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .dashboard {
-
+.dashboard {
+  .left {
+    @media only screen and (max-width: 575px) {
+      padding-right: 0 !important;
+      .btn {
+        font-size: 12px !important;
+      }
+    }
+    .content {
+      @media only screen and (max-width: 575px) {
+        padding: 30px 20px !important;
+      }
+    }
   }
+
+  .right {
+    @media only screen and (max-width: 575px) {
+      padding-left: 0 !important;
+      margin-top: 20px;
+    }
+  }
+
+  .rate {
+    .item {
+      @media only screen and (max-width: 575px) {
+        border: none !important;
+        border-bottom: 1px solid #dee2e6 !important;
+        padding: 10px 0;
+      }
+    }
+  }
+}
 </style>

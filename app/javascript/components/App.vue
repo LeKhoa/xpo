@@ -5,7 +5,7 @@
         <Menu />
       </div>
       <div class="col-md-10">
-        <Home />
+        <Content />
       </div>
     </div>
   </div>
@@ -14,14 +14,14 @@
 <script>
 
 // Home
-import Home from './home/Home.vue'
+import Content from './home/Content.vue'
 import Menu from './home/Menu.vue'
 
 import { mapState, mapActions } from 'vuex';
 
 export default {
   components: {
-    Menu, Home,
+    Menu, Content,
   },
 
   props: ['dataCurrentUser'],
