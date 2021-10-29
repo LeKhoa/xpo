@@ -22,23 +22,21 @@
             </div>
             <p class="mt-2 ps-4"> Safe money transfer using your bank account. Visa, Maestro, Discover, American Express.</p>
 
-            <div class="mt-5 col-md-9">
+            <div class="mt-5 col-md-12 col-xl-9">
               <span class="mt-5 card-item"> CARD NUMBER </span>
-              <input type="text" placeholder="0000 0000 0000 0000" class="mt-4 form-control">
+              <input type="text" placeholder="0000 0000 0000 0000" class="form-control">
 
-              <div class="row mt-3">
-                <div class="col-md-6 card-item">NAME ON CARD</div>
-                <div class="col-md-3 card-item">EXPIRY DATE</div>
-                <div class="col-md-3 card-item">CVV CODE</div>
-              </div>
-              <div class="row mt-2">
-                <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6 mt-3 card-item">
+                  <div> NAME ON CARD</div>
                   <input type="text" class="form-control">
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6 mt-3 card-item">
+                  <div> EXPIRY DATE</div>
                   <input type="text" placeholder="MM / YY" class="form-control">
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6 mt-3 card-item">
+                  <div> CVV CODE</div>
                   <input type="text" class="form-control">
                 </div>
               </div>
@@ -56,8 +54,8 @@
           </div>
 
 
-          <div class="row actions mt-5">
-            <div class="back col-md-8 col-12">
+          <div class="row actions mt-3">
+            <div class="back col-sm-7 col-12 mt-3">
               <button class="btn btn-md bg-white text-start"> 
                 <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 6.50085H14" stroke="#788995" stroke-miterlimit="10" stroke-linecap="square"/>
@@ -67,7 +65,7 @@
                 <span class="back-title"> Back to Customer Info </span>
               </button>
             </div>
-            <div class="complete col-md-4 col-12 text-end">
+            <div class="complete col-sm-5 col-12 text-end mt-3">
               <button class="btn btn-md bg-purple text-white"> Complete Order </button>
             </div>
           </div>
@@ -82,22 +80,22 @@
           <hr>
 
           <div class="row align-items-center">
-            <div class="col-md-3 col-4">
+            <div class="col-md-3 col-sm-2 col-3">
               <img :src="btcImg" class="w-100">
             </div>
             <div class="col-md-9 col-8 text">
-              <span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae vel odio egestas.</span><br>
-              <div class="mt-2"> € 99.90</div>
+              <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae vel odio egestas.</p>
+              <div> € 99.90</div>
             </div>
           </div>
 
           <div class="row mt-4 align-items-center">
-            <div class="col-md-3 col-4">
+            <div class="col-md-3 col-sm-2 col-3">
               <img :src="ethImg" class="w-100">
             </div>
             <div class="col-md-9 col-8 text">
-              <span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae vel odio egestas.</span><br>
-              <div class="mt-2"> € 99.90</div>
+              <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae vel odio egestas.</p>
+              <div> € 99.90</div>
             </div>
           </div>
           <hr>
@@ -154,14 +152,16 @@ export default {
 <style scoped lang="scss">
 .payment {
   .cards {
-    @media only screen and (max-width: 575px) {
+    @media only screen and (max-width: 767px) {
       padding-right: 0 !important;
 
       .content {
-        padding: 10px !important;
+        padding: 30px 20px !important;
       }
+    }
 
-      .brand{
+    @media only screen and (max-width: 575px) {
+      .brand {
         width: 100% !important;
       }
 
@@ -185,10 +185,12 @@ export default {
   }
 
   .cart {
-    @media only screen and (max-width: 575px) {
+    @media only screen and (max-width: 767px) {
       padding-left: 0 !important;
       margin-top: 20px;
+    }
 
+    @media only screen and (max-width: 575px) {
       span {
         font-size: 12px;
       }

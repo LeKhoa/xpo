@@ -153,7 +153,7 @@ export default {
       }
 
       .btn {
-        font-size: 12px !important;
+        font-size: 13px !important;
       }
     }
   }

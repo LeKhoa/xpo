@@ -65,6 +65,12 @@ export default {
   .content {
     @media only screen and (max-width: 575px) {
       padding: 30px 10px !important;
+
+      .actions {
+        .btn {
+          font-size: 13px !important;
+        }
+      }
     }
   }
 }

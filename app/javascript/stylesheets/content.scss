@@ -2,6 +2,12 @@ body {
   background: #F1F5F8;
 }
 
+.btn {
+  font-size: 15px;
+  line-height: 23px;
+  font-family: 'Poppins';
+}
+
 .dashboard {
   .title {
     font-family: 'IBM Plex Sans Condensed';
@@ -104,7 +110,7 @@ body {
   }
 
   p {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 24px;
     color: #788995;
   }
