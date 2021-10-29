@@ -2,7 +2,7 @@
   <div class="payment">
     <div class="row m-0 p-3">
       <div class="cards col-md-8 ps-0 pe-2">
-        <div class="content rounded shadow bg-white p-4">
+        <div class="content h-100 rounded shadow bg-white p-4">
           <label> Payment Selection </label>
           <div class="mt-3 border rounded p-3">
             <div class="col-md-9">

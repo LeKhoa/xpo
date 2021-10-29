@@ -1,7 +1,7 @@
 <template>
   <div class="profile p-3">
     <div class="content rounded shadow bg-white p-5">
-      <div class="col-md-6">
+      <div class="col-md-8 col-xl-6">
         <span class="title mt-3"> john@doe.com </span>
 
         <div class="input-group mt-3">
@@ -41,7 +41,7 @@
         </div>
 
         <div class="row actions mt-5">
-          <div class="col-md-3">
+          <div class="col-5 col-xl-3">
             <button class="btn btn-md bg-purple text-white w-100"> UPDATE </button>
           </div>
         </div>

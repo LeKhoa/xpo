@@ -6,7 +6,7 @@
         <input type="text" placeholder="subject" class="mt-4 form-control">
         <textarea name="message" placeholder="Message" rows="5" class="w-100 mt-3 form-control"></textarea>
         <div class="row actions mt-5">
-          <div class="col-md-4">
+          <div class="col-8 col-sm-6 col-md-7 col-xl-4">
             <button class="btn btn-md bg-purple text-white w-100"> SEND MESSAGE </button>
           </div>
         </div>

@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div class="row m-0">
-      <div class="col-md-2">
+      <div class="col-lg-3 col-xl-2 col-md-12">
         <Menu />
       </div>
-      <div class="col-md-10">
+      <div class="col-lg-9 col-xl-10 col-md-12">
         <Content />
       </div>
     </div>
