@@ -26,16 +26,16 @@
             <%= f.password_field :password, autocomplete: "current-password", class: 'form-control', placeholder: 'Password' %>
           </div>
 
-          <div class='row align-items-end'>
-            <div class='col-6 text-start'>
+          <div class="row align-items-end">
+            <div class="col-6 text-start">
               <% if devise_mapping.rememberable? %>
-                <div class="field mt-3">
+                <div class="d-flex field mt-3">
                   <%= f.check_box :remember_me, class: 'form-check-input shadow-none' %>
-                  <%= f.label :remember_me %>
+                  <%= f.label :remember_me, class: "ms-1" %>
                 </div>
               <% end %>
             </div>
-            <div class='col-6 text-end'>
+            <div class="col-6 text-end">
               <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8.10283 3.9692H7.57771V2.91895C7.57771 1.46961 6.40143 0.293335 4.95209 0.293335C3.50275 0.293335 2.32647 1.46961 2.32647 2.91895V3.9692H1.80135C1.22371 3.9692 0.751099 4.44181 0.751099 5.01945V10.2707C0.751099 10.8483 1.22371 11.3209 1.80135 11.3209H8.10283C8.68046 11.3209 9.15308 10.8483 9.15308 10.2707V5.01945C9.15308 4.44181 8.68046 3.9692 8.10283 3.9692ZM4.95209 8.69531C4.37445 8.69531 3.90184 8.2227 3.90184 7.64507C3.90184 7.06743 4.37445 6.59482 4.95209 6.59482C5.52972 6.59482 6.00233 7.06743 6.00233 7.64507C6.00233 8.2227 5.52972 8.69531 4.95209 8.69531ZM6.57997 3.9692H3.3242V2.91895C3.3242 2.02099 4.05413 1.29107 4.95209 1.29107C5.85005 1.29107 6.57997 2.02099 6.57997 2.91895V3.9692Z" fill="#31297E"/>
               </svg>
