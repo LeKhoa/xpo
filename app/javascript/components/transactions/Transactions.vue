@@ -24,16 +24,26 @@
         </div> <hr>
 
           <div class="row">
-            <div class="col-md-3">Transaction Hash</div>
-            <div class="col-md-3">Amount</div>
-            <div class="col-md-3">Date</div>
+            <div class="col-md-2">Transaction Hash</div>
+            <div class="col-md-2">Amount</div>
+            <div class="col-md-2">Type</div>
+            <div class="col-md-2">Status</div>
+            <div class="col-md-2">Date</div>
+            <div class="col-md-2">Action</div>
           </div>
         <hr>
-        <div v-for="n in 5">
+        <div v-for="transaction in transactions">
           <div class="row">
-            <div class="col-md-3"><span class="hash">7d2c7b06afa0</span>...</div>
-            <div class="col-md-3 amount">1.0126281 BTC</div>
-            <div class="col-md-3 date">01/01/2001</div>
+            <div class="col-md-2 hash">
+              <span>{{transaction.txn_hash}}</span>
+            </div>
+            <div class="col-md-2 amount">{{transaction.amount}} {{transaction.dest_currency}}</div>
+            <div class="col-md-2 date">{{transaction.action}}</div>
+            <div class="col-md-2 date">{{transaction.status}}</div>
+            <div class="col-md-2 date">{{formatDate(transaction.created_at)}}</div>
+            <div class="col-md-2 status">
+              <a :href="transaction.status_url" target="_blank">View</a>
+            </div>
           </div><hr>
         </div>
 
@@ -63,14 +73,41 @@
 export default {
   data: function () {
     return {
-      message: "Hello Vue!"
+      message: "Hello Vue!",
+      transactions: [],
     }
+  },
+
+  methods: {
+    formatDate(date){
+      var d = new Date(date);
+      var dd = d.getDate() >= 10 ? d.getDate() : '0' + d.getDate() ;
+      var mm = d.getMonth() + 1;
+      mm = mm >= 10 ? mm : '0' + mm;
+      var yyyy = d.getFullYear();
+      return `${dd}/${mm}/${yyyy}`;
+    }
+
+  },
+
+  mounted() {
+    this.$http.get(`/api/coinpayments/transactions`)
+      .then(response => {
+        this.transactions = response.data.transactions;
+      }).catch(error => {
+        this.error = error.response;
+    });
   }
 }
 </script>
 
 <style scoped lang="scss">
 .transactions {
+  .hash {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   @media only screen and (max-width: 575px) {
     .actions {
         text-align: left !important;

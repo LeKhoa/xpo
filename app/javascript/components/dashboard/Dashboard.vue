@@ -22,20 +22,52 @@
                 </svg>
               </span>
               <select class="form-select shadow-none rounded-0" v-model="paymentMethod">
-                <option value="FIAT"> FIAT </option>
-                <option value="CRYPTO"> CRYPTO </option>
+                <option value="FIAT"> FIAT (Onramper) </option>
+                <option value="CRYPTO"> CRYPTO (Coinpayments) </option>
               </select>
             </div>
+
+            <div v-if = "paymentMethod == 'CRYPTO'">
+              <label class="mt-3"> Receive Currency </label>
+              <div class="input-group mt-2">
+                <span class="input-group-text" id="basic-addon1">
+                  <svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.89003 7.9C3.62003 7.31 2.89003 6.7 2.89003 5.75C2.89003 4.66 3.90003 3.9 5.59003 3.9C7.37003 3.9 8.03003 4.75 8.09003 6H10.3C10.23 4.28 9.18003 2.7 7.09003 2.19V0H4.09003V2.16C2.15003 2.58 0.590034 3.84 0.590034 5.77C0.590034 8.08 2.50003 9.23 5.29003 9.9C7.79003 10.5 8.29003 11.38 8.29003 12.31C8.29003 13 7.80003 14.1 5.59003 14.1C3.53003 14.1 2.72003 13.18 2.61003 12H0.410034C0.530034 14.19 2.17003 15.42 4.09003 15.83V18H7.09003V15.85C9.04003 15.48 10.59 14.35 10.59 12.3C10.59 9.46 8.16003 8.49 5.89003 7.9Z" fill="#131031"/>
+                  </svg>
+                </span>
+                <select class="form-select shadow-none rounded-0" v-model="receiveCurrency">
+                  <option value="BTC"> BTC </option>
+                  <option value="ETH"> ETH </option>
+                  <option value="LTC"> LTC </option>
+                  <option value="BNB"> BNB </option>
+                  <option value="BCH"> BCH </option>
+                  <option value="USDT"> USDT </option>
+                  <option value="USDC"> USDC </option>
+                </select>
+              </div>
+
+              <label class="mt-3"> Receive Address </label>
+              <div class="input-group mt-2">
+                <span class="input-group-text" id="basic-addon1">
+                  <svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.89003 7.9C3.62003 7.31 2.89003 6.7 2.89003 5.75C2.89003 4.66 3.90003 3.9 5.59003 3.9C7.37003 3.9 8.03003 4.75 8.09003 6H10.3C10.23 4.28 9.18003 2.7 7.09003 2.19V0H4.09003V2.16C2.15003 2.58 0.590034 3.84 0.590034 5.77C0.590034 8.08 2.50003 9.23 5.29003 9.9C7.79003 10.5 8.29003 11.38 8.29003 12.31C8.29003 13 7.80003 14.1 5.59003 14.1C3.53003 14.1 2.72003 13.18 2.61003 12H0.410034C0.530034 14.19 2.17003 15.42 4.09003 15.83V18H7.09003V15.85C9.04003 15.48 10.59 14.35 10.59 12.3C10.59 9.46 8.16003 8.49 5.89003 7.9Z" fill="#131031"/>
+                  </svg>
+                </span>
+                <input type="text" class="form-control" v-model="receiveAddress">
+              </div>
+            </div>
+
           </div>
+
+          <div v-if="error" class="text-center text-danger"> {{error}} </div>
 
           <div class="row actions pt-4 mt-5">
             <div class="col-md-6 col-sm-4 col-6">
               <a v-if="paymentMethod == 'FIAT'" :href="onRamperWidgetUrl" target="_blank">
                 <button class="btn btn-md bg-purple text-white w-100"> Deposit </button>
               </a>
-              <a v-else :href="coinPaymentUrl" target="_blank">
-                <button class="btn btn-md bg-purple text-white w-100"> Deposit </button>
-              </a>
+              
+              <button v-else class="btn btn-md bg-purple text-white w-100" @click="createTransaction()"> Deposit </button>
             </div>
             <div class="col-md-6 col-sm-4 col-6">
               <button class="btn btn-md bg-purple text-white w-100"> Widthdraw </button>
@@ -145,7 +177,38 @@ export default {
       message: "Hello Vue!",
       amount: 500,
       paymentMethod: 'FIAT',
+      receiveAddress: '',
+      receiveCurrency: '',
       onRamperApiKey: process.env.ONRAMPER_API_KEY,
+      error: '',
+    }
+  },
+
+  methods: {
+    createTransaction() {
+      var params = {
+        transaction: {
+          amount: this.amount,
+          currency: this.receiveCurrency,
+          address: this.receiveAddress,
+        }
+      }
+
+      this.$http.post('/api/coinpayments/transactions.json', params)
+        .then(response => {
+          this.createTransactionSuccessfull(response);
+        }).catch(error => {
+          this.createTransactionFailed(error);
+      });
+    },
+
+    createTransactionSuccessfull(response) {
+      this.$router.push({ name: 'payment', params: { id: response.data.transaction.id } })
+    },
+
+    createTransactionFailed(error) {
+      console.log(error)
+      this.error = error.response.data.message;
     }
   },
 

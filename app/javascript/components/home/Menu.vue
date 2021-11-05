@@ -38,7 +38,7 @@
           <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M3.78947 7.6579H2.10526V13.5526H3.78947V7.6579ZM8.8421 7.6579H7.15789V13.5526H8.8421V7.6579ZM16 15.2368H0V16.9211H16V15.2368ZM13.8947 7.6579H12.2105V13.5526H13.8947V7.6579ZM8 1.98211L12.3874 4.28948H3.61263L8 1.98211ZM8 0.078949L0 4.28948V5.97369H16V4.28948L8 0.078949Z" fill="#131031"/>
           </svg>
-          <router-link to="/payment" class="mx-2"> Payment </router-link>
+          <router-link to="/payment/1" class="mx-2"> Payment </router-link>
         </li>
       </ul>
     </div>

@@ -6,5 +6,11 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
+  namespace :api, defaults: { format: :json } do
+    namespace :coinpayments do
+      resources :transactions
+    end
+  end
+
   get '/*path', to: 'home#index', format: false
 end

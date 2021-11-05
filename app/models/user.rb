@@ -7,4 +7,6 @@ class User < ApplicationRecord
   attr_accessor :terms_and_conditions, :name
 
   validates_acceptance_of :terms_and_conditions
+
+  has_many :transactions, dependent: :destroy
 end
