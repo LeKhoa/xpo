@@ -9,3 +9,27 @@
 .form-control, .input-group-text, .form-check-input[type=checkbox] {
   border: 1px solid #86A4C3;
 }
+
+.status_tag {
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 3px 5px 2px 5px;
+  font-size: 0.75em;
+  width: 100px;
+  border-radius: 3px;
+  text-align: center;
+
+  &.completed {
+    background: green;
+  }
+  &.canceled {
+    background: #B22222;
+  }
+  &.pending {
+    background: DarkOrange;
+  }
+  &.initialized {
+    background: #329acf;
+  }
+}

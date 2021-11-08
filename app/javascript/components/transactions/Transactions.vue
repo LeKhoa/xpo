@@ -38,8 +38,8 @@
               <span>{{transaction.txn_hash}}</span>
             </div>
             <div class="col-md-2 amount">{{transaction.amount}} {{transaction.dest_currency}}</div>
-            <div class="col-md-2 date">{{transaction.action}}</div>
-            <div class="col-md-2 date">{{transaction.status}}</div>
+            <div class="col-md-2 action">{{transaction.action}}</div>
+            <div class="col-md-2 status_tag" :class="transaction.status">{{transaction.status}}</div>
             <div class="col-md-2 date">{{formatDate(transaction.created_at)}}</div>
             <div class="col-md-2 status">
               <a :href="transaction.status_url" target="_blank">View</a>

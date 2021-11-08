@@ -8,7 +8,7 @@
             <span class="title"> Status: </span>
           </div>
           <div class="col-8">
-            <span> {{transaction.status}} </span>
+            <span class="status_tag" :class="transaction.status"> {{transaction.status}} </span>
           </div>
         </div>
       
