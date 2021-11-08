@@ -39,10 +39,14 @@
                   <option value="BTC"> BTC </option>
                   <option value="ETH"> ETH </option>
                   <option value="LTC"> LTC </option>
-                  <option value="BNB"> BNB </option>
+                  <option value="BNB.BSC"> BNB-BSC </option>
                   <option value="BCH"> BCH </option>
                   <option value="USDT"> USDT </option>
                   <option value="USDC"> USDC </option>
+                  <option value="USDT.TRC20"> USDT-TRC20 </option>
+                  <option value="USDT.ERC20"> USDT-ERC20 </option>
+                  <option value="USDT.BEP20"> USDT-BEP20 </option>
+                  <option value="LTCT"> Litecoin Testnet </option>
                 </select>
               </div>
 
@@ -216,10 +220,6 @@ export default {
     onRamperWidgetUrl() {
       return `https://widget.onramper.com?defaultAmount=${this.amount}&apiKey=${this.onRamperApiKey}`;
     },
-
-    coinPaymentUrl() {
-      return 'https://www.coinpayments.net';
-    }
   },
 
   mounted() {
