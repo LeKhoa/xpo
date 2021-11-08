@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :coinpayments do
       resources :transactions
+      post '/webhooks', to: 'webhooks#create'
     end
   end
 

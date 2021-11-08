@@ -56,3 +56,4 @@ group :test do
 end
 
 gem 'coinpayments'
+gem 'aasm', '~> 5.2'
