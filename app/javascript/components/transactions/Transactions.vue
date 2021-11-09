@@ -49,15 +49,15 @@
 
         <div class="pagination row align-items-center justify-content-end">
           <div class="col-xl-2 col-lg-3 col-6 text-end">
-            <span> 1-8 of 55 </span>
+            <span> {{page * per_page + 1}}-{{page * per_page + transactions.length}} of {{total}} </span>
           </div>
           <div class="col-xl-2 col-lg-3 col-6 text-end">
-            <button class="btn">
+            <button class="btn" :class="{ disabled : page == 0 }" @click="prevPage">
               <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7.62557 13.875L1.90615 7.94442C1.86879 7.90568 1.86879 7.84432 1.90615 7.80558L7.62557 1.875" stroke="#9FA2B4" stroke-width="2" stroke-linecap="round"/>
               </svg>
             </button>
-            <button class="btn">
+            <button class="btn" :class="{ disabled : page == total_page - 1 }" @click="nextPage">
               <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1.55743 13.875L7.27686 7.94442C7.31422 7.90568 7.31421 7.84432 7.27686 7.80558L1.55743 1.875" stroke="#9FA2B4" stroke-width="2" stroke-linecap="round"/>
               </svg>
@@ -75,6 +75,10 @@ export default {
     return {
       message: "Hello Vue!",
       transactions: [],
+      total_page: 0,
+      page: 0,
+      per_page: 0,
+      total: 0,
     }
   },
 
@@ -86,17 +90,39 @@ export default {
       mm = mm >= 10 ? mm : '0' + mm;
       var yyyy = d.getFullYear();
       return `${dd}/${mm}/${yyyy}`;
-    }
+    },
 
+    nextPage() {
+      if(this.page < this.total_page - 1)
+        this.page ++;
+    },
+
+    prevPage() {
+      if(this.page > 0)
+        this.page --;
+    },
+
+    fetchTransaction() {
+      this.$http.get(`/api/coinpayments/transactions`, { params: { page: this.page }})
+        .then(response => {
+          this.transactions = response.data.transactions;
+          this.total_page = parseInt(response.data.total_page);
+          this.per_page = parseInt(response.data.per_page);
+          this.total = parseInt(response.data.total);
+        }).catch(error => {
+          this.error = error.response;
+      });
+    }
+  },
+
+  watch: {
+    page: function(val) {
+      this.fetchTransaction();
+    }
   },
 
   mounted() {
-    this.$http.get(`/api/coinpayments/transactions`)
-      .then(response => {
-        this.transactions = response.data.transactions;
-      }).catch(error => {
-        this.error = error.response;
-    });
+    this.fetchTransaction();
   }
 }
 </script>
