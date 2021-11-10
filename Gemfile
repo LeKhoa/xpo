@@ -57,3 +57,5 @@ end
 
 gem 'coinpayments'
 gem 'aasm', '~> 5.2'
+gem 'redis-rails'
+gem 'administrate'

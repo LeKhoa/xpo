@@ -185,6 +185,7 @@ export default {
       receiveCurrency: '',
       onRamperApiKey: process.env.ONRAMPER_API_KEY,
       error: '',
+      pContext: null,
     }
   },
 
@@ -213,17 +214,27 @@ export default {
     createTransactionFailed(error) {
       console.log(error)
       this.error = error.response.data.message;
+    },
+
+    getPartnerContext(){
+      this.$http.get(`/api/onramper/partner_context`)
+        .then(response => {
+          this.pContext = response.data.context;
+          console.log(this.pContext);
+        }).catch(error => {
+          this.error = error.response.data.message;
+      });
     }
   },
 
   computed: {
     onRamperWidgetUrl() {
-      return `https://widget.onramper.com?defaultAmount=${this.amount}&apiKey=${this.onRamperApiKey}`;
+      return `https://widget.onramper.com?defaultAmount=${this.amount}&apiKey=${this.onRamperApiKey}&partnerContext=${encodeURIComponent(JSON.stringify(this.pContext))}`;
     },
   },
 
   mounted() {
-    console.log(this.onRamperApiKey);
+    this.getPartnerContext();
   }
 }
 </script>

@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :admin_users
+      resources :users
+      resources :transactions
+
+      root to: "admin_users#index"
+    end
   devise_for :admin_users
 
   devise_for :users, controllers: {
@@ -15,6 +22,12 @@ Rails.application.routes.draw do
     namespace :coinpayments do
       resources :transactions
       post '/webhooks', to: 'webhooks#create'
+    end
+
+    namespace :onramper do
+      resources :transactions
+      post '/webhooks', to: 'webhooks#create'
+      get '/partner_context', to: 'webhooks#partner_context'
     end
 
     resources :users
