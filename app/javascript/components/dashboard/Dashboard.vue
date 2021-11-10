@@ -175,6 +175,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 export default {
   data () {
     return {
@@ -220,21 +222,29 @@ export default {
       this.$http.get(`/api/onramper/partner_context`)
         .then(response => {
           this.pContext = response.data.context;
-          console.log(this.pContext);
         }).catch(error => {
           this.error = error.response.data.message;
       });
+    },
+
+    partnerContext() {
+      return {
+        userId: this.currentUser.id,
+      }
     }
   },
 
   computed: {
+    ...mapState(['currentUser']),
+
     onRamperWidgetUrl() {
       return `https://widget.onramper.com?defaultAmount=${this.amount}&apiKey=${this.onRamperApiKey}&partnerContext=${encodeURIComponent(JSON.stringify(this.pContext))}`;
     },
+
   },
 
   mounted() {
-    this.getPartnerContext();
+    this.pContext = this.partnerContext();
   }
 }
 </script>
