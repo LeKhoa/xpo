@@ -6,10 +6,15 @@ class Transaction < ApplicationRecord
     state :initialized, initial: true
     state :pending
     state :completed
+    state :error
     state :canceled
 
     event :cancel do
       transitions from: [:initialized, :pending], to: :canceled
+    end
+
+    event :error do
+      transitions from: [:initialized, :pending], to: :error
     end
 
     event :complete do

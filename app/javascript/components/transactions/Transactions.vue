@@ -1,6 +1,6 @@
 <template>
   <div class="transactions p-3">
-    <div class="col-md-8">
+    <div class="col-md-10">
       <div class="rounded shadow bg-white p-4">
         <div class="row justify-content-between">
           <div class="col-md-6">
@@ -37,9 +37,11 @@
             <div class="col-md-2 hash">
               <span>{{transaction.txn_hash}}</span>
             </div>
-            <div class="col-md-2 amount">{{transaction.amount}} {{transaction.dest_currency}}</div>
+            <div class="col-md-2 amount">{{parseFloat(transaction.amount).toPrecision(8)}}  {{transaction.currency}}</div>
             <div class="col-md-2 action">{{transaction.action}}</div>
-            <div class="col-md-2 status_tag" :class="transaction.status">{{transaction.status}}</div>
+            <div class="col-md-2">
+              <div class="status_tag" :class="transaction.status">{{transaction.status}} </div>
+            </div>
             <div class="col-md-2 date">{{formatDate(transaction.created_at)}}</div>
             <div class="col-md-2 status">
               <a :href="transaction.status_url" target="_blank">View</a>

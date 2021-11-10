@@ -8,9 +8,15 @@ module Api
 
       def create
         signature = request.headers[SIGNATURE_HEADER_NAME]
-        puts "##################{signature}################"
 
         return render json: { error: 'Invalid signature'}, status: :unauthorized unless valid_signature?(signature)
+
+        user_id = params[:payload][:partnerContext][:userId]
+        user = User.find_by(id: user_id)
+        if user
+          service = ::Onramper::TransactionService.new(user)
+          service.create_or_update(params)
+        end
 
         render json: { message: :success }, status: :ok
       end
@@ -33,8 +39,6 @@ module Api
       def valid_signature?(header_signature)
         secret = ENV['ONRAMPER_SECRET']
         data = request.body.read
-        puts "################data:#{data}###############"
-        puts "##############raw_post: #{request.raw_post}###############"
         header_signature == OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), secret, data)
       end
     end

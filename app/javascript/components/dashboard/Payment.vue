@@ -71,7 +71,7 @@
             <span class="title"> Status URL: </span>
           </div>
           <div class="col-8">
-            <a :href="transaction.status_url" target="_blank">View payment status</a>
+            <a v-if="transaction.status_url" :href="transaction.status_url" target="_blank">View payment status</a>
           </div>
         </div>
 
@@ -80,7 +80,7 @@
             <span class="title"> Checkout URL: </span>
           </div>
           <div class="col-8">
-            <a :href="transaction.checkout_url" target="_blank" >Complete your payment</a>
+            <a  v-if="transaction.checkout_url" :href="transaction.checkout_url" target="_blank" >Complete your payment</a>
           </div>
         </div>
         
