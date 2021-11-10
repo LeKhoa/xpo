@@ -2,10 +2,17 @@ module Api
   module Onramper
     class WebhooksController < ApplicationController
       skip_before_action :verify_authenticity_token
+      skip_before_action :authenticate_user!
+
+      SIGNATURE_HEADER_NAME = 'X-Onramper-Webhook-Signature'.freeze
 
       def create
-        return render json: { error: 'Invalid merchant ID'}, status: :unauthorized if invalid_merchant?(params[:merchant])
+        signature = request.headers[SIGNATURE_HEADER_NAME]
+        puts "##################{signature}################"
 
+        return render json: { error: 'Invalid signature'}, status: :unauthorized unless valid_signature?(signature)
+
+        render json: { message: :success }, status: :ok
       end
 
 
@@ -23,8 +30,10 @@ module Api
       def decode_signature(signature)
       end
 
-      def invalid_secret?
-        ENV['COINPAYMENT_MERCHANT_ID']
+      def valid_signature?(header_signature)
+        secret = ENV['ONRAMPER_SECRET']
+        data = request.body
+        header_signature == OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), secret, data)
       end
     end
   end
