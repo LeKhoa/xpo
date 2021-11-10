@@ -25,6 +25,9 @@
     background: green;
   }
   &.canceled {
+    background: black;
+  }
+  &.failed {
     background: #B22222;
   }
   &.pending {
