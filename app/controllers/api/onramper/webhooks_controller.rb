@@ -32,7 +32,9 @@ module Api
 
       def valid_signature?(header_signature)
         secret = ENV['ONRAMPER_SECRET']
-        data = request.body
+        data = request.body.read
+        puts "################data:#{data}###############"
+        puts "##############raw_post: #{request.raw_post}###############"
         header_signature == OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), secret, data)
       end
     end
