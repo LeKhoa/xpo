@@ -5,16 +5,16 @@ class Transaction < ApplicationRecord
   aasm column: :status do
     state :initialized, initial: true
     state :pending
-    state :completed
-    state :error
     state :canceled
+    state :failed
+    state :completed
 
     event :cancel do
       transitions from: [:initialized, :pending], to: :canceled
     end
 
-    event :error do
-      transitions from: [:initialized, :pending], to: :error
+    event :fail do
+      transitions from: [:initialized, :pending], to: :failed
     end
 
     event :complete do
