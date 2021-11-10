@@ -3,6 +3,7 @@ module Api
   module Coinpayments
     class WebhooksController < ApplicationController
       skip_before_action :verify_authenticity_token
+      skip_before_action :authenticate_user!
 
       def create
         return render json: { error: 'Invalid merchant ID'}, status: :unauthorized if invalid_merchant?(params[:merchant])
