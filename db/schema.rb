@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_05_043508) do
+ActiveRecord::Schema.define(version: 2021_11_12_110114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,19 @@ ActiveRecord::Schema.define(version: 2021_11_05_043508) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "exchange_accounts", force: :cascade do |t|
+    t.string "exchange"
+    t.string "shrimpy_account_id"
+    t.string "public_key"
+    t.string "private_key"
+    t.string "status", default: "active"
+    t.boolean "is_rebalancing", default: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_exchange_accounts_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -55,9 +68,12 @@ ActiveRecord::Schema.define(version: 2021_11_05_043508) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "shrimpy_user_id"
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "exchange_accounts", "users"
   add_foreign_key "transactions", "users"
 end
