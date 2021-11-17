@@ -14,12 +14,24 @@ class BaseService
   end
 
   def response_error!(response)
-    # Rollbar.error(response.to_s)
+    if Rails.env.production?
+      Rollbar.error(response.to_s)
+    else
+      puts "########## RESPONSE ERROR #########"
+      puts response.to_s
+      puts "###################################"
+    end
     error!(response.to_s)
   end
 
   def execute_error!(e)
-    # Rollbar.error(e)
+    if Rails.env.production?
+      Rollbar.error(e)
+    else
+      puts "########## EXECUTE ERROR #########"
+      puts e
+      puts "###################################"
+    end
     error!(e.message)
   end
 end

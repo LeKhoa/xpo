@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Shrimpy
   class AccountService < BaseService
     attr_reader :account, :shrimpy_user
