@@ -4,7 +4,7 @@ module Api
     class AccountsController < ApplicationController
 
       def add_exchange_account
-        service = ::Shrimpy::ClientService.new(current_user)
+        service = ::Shrimpy::AccountService.new(current_user)
         service.add_exchange_account(params[:public_key], params[:private_key], params[:is_rebalancing])
         return render json: { message: service.error }, status: :unprocessable_entity unless service.success?
 
@@ -12,7 +12,7 @@ module Api
       end
 
       def remove_exchange_account
-        service = ::Shrimpy::ClientService.new(current_user)
+        service = ::Shrimpy::AccountService.new(current_user)
         service.remove_exchange_account(params[:shrimpy_account_id])
         return render json: { message: service.error }, status: :unprocessable_entity unless service.success?
 

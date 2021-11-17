@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class ExchangeAccountDashboard < Administrate::BaseDashboard
+class ShrimpyUserDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,14 +8,11 @@ class ExchangeAccountDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+    exchange_accounts: Field::HasMany,
     id: Field::Number,
-    exchange: Field::Select.with_options(collection: ExchangeAccount::EXCHANGES.values),
-    shrimpy_account_id: Field::String,
-    shrimpy_user: Field::BelongsTo,
-    public_key: Field::String,
-    private_key: Field::String,
-    status: Field::Select.with_options(collection: ExchangeAccount::STATUS.values),
-    is_rebalancing: Field::Boolean,
+    name: Field::String,
+    uuid: Field::String,
+    active: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -26,24 +23,21 @@ class ExchangeAccountDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
+    exchange_accounts
     id
-    exchange
-    shrimpy_user
-    shrimpy_account_id
-    status
+    name
+    uuid
+    active
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
+    exchange_accounts
     id
-    exchange
-    shrimpy_user
-    shrimpy_account_id
-    public_key
-    private_key
-    status
-    is_rebalancing
+    name
+    uuid
+    active
     created_at
     updated_at
   ].freeze
@@ -52,13 +46,9 @@ class ExchangeAccountDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    exchange
-    shrimpy_user
-    shrimpy_account_id
-    public_key
-    private_key
-    status
-    is_rebalancing
+    name
+    uuid
+    active
   ].freeze
 
   # COLLECTION_FILTERS
@@ -73,10 +63,10 @@ class ExchangeAccountDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how exchange accounts are displayed
+  # Overwrite this method to customize how shrimpy users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(exchange_account)
-  #   "ExchangeAccount ##{exchange_account.id}"
-  # end
+  def display_resource(shrimpy_user)
+    "#{shrimpy_user.name}"
+  end
 end

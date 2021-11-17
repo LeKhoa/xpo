@@ -9,5 +9,4 @@ class User < ApplicationRecord
   validates_acceptance_of :terms_and_conditions
 
   has_many :transactions, dependent: :destroy
-  has_many :exchange_accounts, dependent: :destroy
 end

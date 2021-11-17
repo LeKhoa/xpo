@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :admin do
       resources :admin_users
       resources :users
+      resources :shrimpy_users
       resources :exchange_accounts
       resources :transactions
 

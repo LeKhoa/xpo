@@ -52,6 +52,7 @@
           </div>
         </div>
 
+        <!--
         <div class="col-md-8 col-xl-6 p-5 ps-0">
           <div class="border rounded p-3 h-100">
             <div class="account-1 mt-3">
@@ -179,6 +180,8 @@
             </div>
           </div>
         </div>
+
+        -->
       </div>
     </div>
   </div>
