@@ -27,6 +27,22 @@ module Shrimpy
       execute_error!(e)
     end
 
+    def rebalance
+      response = ApiService.rebalance(shrimpy_user.uuid, account.shrimpy_account_id)
+      return response_error!(response.body) unless response.success?
+
+    rescue StandardError => e
+      execute_error!(e)
+    end
+
+    def get_balance
+      response = ApiService.get_balance(shrimpy_user.uuid, account.shrimpy_account_id)
+      return response_error!(response.body) unless response.success?
+
+    rescue StandardError => e
+      execute_error!(e)
+    end
+
     def remove_exchange_account(shrimpy_account_id)
       response = ApiService.unlink_exchange_account(user.shrimpy_user_id, shrimpy_account_id)
       return response_error!(response.body) unless response.success?

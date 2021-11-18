@@ -97,6 +97,7 @@ GEM
       hashie
       httparty
     concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crass (1.0.6)
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
@@ -246,6 +247,10 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    sidekiq (6.3.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     spring (3.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -307,6 +312,7 @@ DEPENDENCIES
   rollbar
   sass-rails (>= 6)
   selenium-webdriver
+  sidekiq
   spring
   turbolinks (~> 5)
   web-console (>= 4.1.0)

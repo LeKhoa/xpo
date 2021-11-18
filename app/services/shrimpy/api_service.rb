@@ -69,9 +69,20 @@ module Shrimpy
         HTTParty.post(BASE_URL + path, headers: header, body: body)
       end
 
+      # Example:
+      # Shrimpy::ApiService.get_balance('355dab82-3053-4d5e-948f-2d44f07b8a2d', '189128').body
       def get_balance(uuid, shrimpy_account_id)
         path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/balance"
         get_request(path)
+      end
+
+      # Example:
+      # Shrimpy::ApiService.rebalance('355dab82-3053-4d5e-948f-2d44f07b8a2d', '189128').body
+      def rebalance(uuid, shrimpy_account_id)
+        path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/rebalance"
+        nonce = get_nonce
+        header = generate_header(path, 'POST', nonce)
+        HTTParty.post(BASE_URL + path, headers: header)
       end
 
       def list_accounts(uuid)
