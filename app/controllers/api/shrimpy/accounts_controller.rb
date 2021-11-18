@@ -28,7 +28,18 @@ module Api
         }
       end
 
-      private
+      def get_rebalancing_balance
+        account = ExchangeAccount.active.rebalancing.last
+        return render json: { message: 'Account is not exist' }, status: :not_found unless account
+
+        service = ::Shrimpy::AccountService.new(account)
+        balances = service.get_balance
+        return render json: { message: service.error }, status: :unprocessable_entity unless service.success?
+
+        render json: {
+          balances: balances,
+        }
+      end
     end
   end
 end

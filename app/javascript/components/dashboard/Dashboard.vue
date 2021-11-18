@@ -105,8 +105,9 @@
 
               <div class="balance mt-5 align-items-end">
                 <div class="col-md-11 text-center rounded shadow p-3">
+                  <div v-if="balanceError" class="text-danger text-center"> {{balanceError}}</div>
                   <span class="title"> USD BALANCE </span>
-                  <div class="amount"> 724.53USD </div>
+                  <div class="amount"> {{rebalancingUSDBalance()}}USD </div>
                 </div>
               </div>
             </div>
@@ -187,7 +188,9 @@ export default {
       receiveCurrency: '',
       onRamperApiKey: process.env.ONRAMPER_API_KEY,
       error: '',
+      balanceError: '',
       pContext: null,
+      rebalancing_balances: [],
     }
   },
 
@@ -231,7 +234,25 @@ export default {
       return {
         userId: this.currentUser.id,
       }
-    }
+    },
+
+    getRebalancingBalances() {
+      this.$http.get('/api/shrimpy/rebalancing_balance')
+        .then(response => {
+          this.rebalancing_balances = response.data.balances;
+        }).catch(error => {
+          this.balanceError = error.response.data.message;
+      });
+    },
+
+    rebalancingUSDBalance() {
+      return this.rebalancing_balances.map( x => x.usdValue).reduce((a, b) => a + b, 0).toFixed(3);
+    },
+
+    btcBalance() {
+      return 5;
+    },
+
   },
 
   computed: {
@@ -245,6 +266,7 @@ export default {
 
   mounted() {
     this.pContext = this.partnerContext();
+    this.getRebalancingBalances();
   }
 }
 </script>

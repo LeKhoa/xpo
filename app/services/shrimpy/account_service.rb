@@ -38,7 +38,7 @@ module Shrimpy
     def get_balance
       response = ApiService.get_balance(shrimpy_user.uuid, account.shrimpy_account_id)
       return response_error!(response.body) unless response.success?
-
+      JSON.parse(response.body)['balances']
     rescue StandardError => e
       execute_error!(e)
     end
