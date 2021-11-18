@@ -17,7 +17,7 @@ class BaseService
     if Rails.env.production?
       Rollbar.error(response.to_s)
     else
-      puts "########## RESPONSE ERROR #########"
+      puts "\n########## RESPONSE ERROR #########"
       puts response.to_s
       puts "###################################"
     end
@@ -28,7 +28,7 @@ class BaseService
     if Rails.env.production?
       Rollbar.error(e)
     else
-      puts "########## EXECUTE ERROR #########"
+      puts "\n########## EXECUTE ERROR #########"
       puts e
       puts "###################################"
     end

@@ -41,11 +41,8 @@ module Shrimpy
       end
 
       def get_users
-        request_path = '/v1/users'
-        nonce = get_nonce
-
-        header = generate_header(request_path, 'GET', nonce)
-        HTTParty.get(BASE_URL + request_path, headers: header)
+        path = '/v1/users'
+        get_request(path)
       end
 
       def remove_user(uuid)
@@ -55,22 +52,29 @@ module Shrimpy
         HTTParty.delete(BASE_URL + request_path, headers: header)
       end
 
-      def get_strategy(shrimpy_user_id, shrimpy_account_id)
-        request_path = "/v1/users/#{shrimpy_user_id}/accounts/#{shrimpy_account_id}/strategy"
-        nonce = get_nonce
-        header = generate_header(request_path, 'GET', nonce)
-        HTTParty.get(BASE_URL + request_path, headers: header)
+      def get_strategy(uuid, shrimpy_account_id)
+        path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/strategy"
+        get_request(path)
       end
 
-      def get_balance(shrimpy_user_id, shrimpy_account_id)
-        request_path = "/v1/users/#{shrimpy_user_id}/accounts/#{shrimpy_account_id}/balance"
-        nonce = get_nonce
-        header = generate_header(request_path, 'GET', nonce)
-        HTTParty.get(BASE_URL + request_path, headers: header)
+      def get_balance(uuid, shrimpy_account_id)
+        path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/balance"
+        get_request(path)
+      end
+
+      def list_accounts(uuid)
+        path = "/v1/users/#{uuid}/accounts"
+        get_request(path)
       end
 
       def get_nonce
         Time.now.to_i * 1000;
+      end
+
+      def get_request(path)
+        nonce = get_nonce
+        header = generate_header(path, 'GET', nonce)
+        HTTParty.get(BASE_URL + path, headers: header)
       end
       
 
