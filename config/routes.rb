@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :shrimpy_users
       resources :exchange_accounts
       resources :transactions
+      resources :strategies
 
       root to: "admin_users#index"
     end

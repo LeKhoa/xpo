@@ -57,6 +57,18 @@ module Shrimpy
         get_request(path)
       end
 
+      def set_strategy(uuid, shrimpy_account_id, allocations)
+        path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/strategy"
+        nonce = get_nonce
+        body = {
+          isDynamic: false,
+          allocations: allocations
+        }.to_json
+
+        header = generate_header(path, 'POST', nonce, body)
+        HTTParty.post(BASE_URL + path, headers: header, body: body)
+      end
+
       def get_balance(uuid, shrimpy_account_id)
         path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/balance"
         get_request(path)

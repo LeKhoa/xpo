@@ -74,6 +74,9 @@ GEM
       momentjs-rails (~> 2.8)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
+    administrate-field-jsonb (0.4.3)
+      administrate (< 1.0.0)
+      rails (>= 4.2, < 7)
     bcrypt (3.1.16)
     bindex (0.8.1)
     bootsnap (1.7.5)
@@ -287,6 +290,7 @@ PLATFORMS
 DEPENDENCIES
   aasm (~> 5.2)
   administrate
+  administrate-field-jsonb (~> 0.4.3)
   bootsnap (= 1.7.5)
   byebug
   capybara (>= 3.26)

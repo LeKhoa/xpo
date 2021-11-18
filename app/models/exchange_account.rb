@@ -12,8 +12,8 @@ class ExchangeAccount < ApplicationRecord
   belongs_to :shrimpy_user
 
   scope :active, ->{ where(status: 'active') }
-  scope :rebalancing, ->{ where(is_rebalancing: true).active }
-  scope :normal, ->{ where(is_rebalancing: false).active }
+  scope :rebalancing, ->{ where(is_rebalancing: true) }
+  scope :normal, ->{ where(is_rebalancing: false) }
 
   after_create :add_shrimpy_exchange_account, if: :shrimpy_account_is_not_exist?
 

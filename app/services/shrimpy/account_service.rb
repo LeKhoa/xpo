@@ -19,6 +19,14 @@ module Shrimpy
       execute_error!(e)
     end
 
+    def set_strategy(allocations)
+      response = ApiService.set_strategy(shrimpy_user.uuid, account.shrimpy_account_id, allocations)
+      return response_error!(response.body) unless response.success?
+
+    rescue StandardError => e
+      execute_error!(e)
+    end
+
     def remove_exchange_account(shrimpy_account_id)
       response = ApiService.unlink_exchange_account(user.shrimpy_user_id, shrimpy_account_id)
       return response_error!(response.body) unless response.success?
