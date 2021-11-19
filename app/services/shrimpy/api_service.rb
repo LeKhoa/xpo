@@ -2,10 +2,8 @@
 
 module Shrimpy
   class ApiService
-
-    FIXIE = URI.parse ENV['FIXIE_URL']
-
     class << self
+      FIXIE = URI.parse(ENV['FIXIE_URL'])
       BASE_URL = ENV['SHRIMPY_BASE_URL']
       API_KEY = ENV['SHRIMPY_API_KEY']
       SECRET_KEY = ENV['SHRIMPY_SECRET_KEY']
@@ -18,7 +16,7 @@ module Shrimpy
       end
 
       def link_exchange_account(exchange, uuid, public_key, private_key)
-        request_path = "/v1/users/#{uuid}/accounts"
+        path = "/v1/users/#{uuid}/accounts"
         nonce = get_nonce
         body = {
           exchange: exchange,
@@ -26,32 +24,32 @@ module Shrimpy
           privateKey: private_key
         }.to_json 
 
-        header = generate_header(request_path, 'POST', nonce, body)
-        HTTParty.post(BASE_URL + request_path, headers: header, body: body)
+        headers = generate_header(path, 'POST', nonce, body)
+        post_request(path, headers, body)
       end
 
       def create_user(name)
-        request_path = '/v1/users'
+        path = '/v1/users'
         nonce = get_nonce
         body = {
           name: name,
         }.to_json
 
-        header = generate_header(request_path, 'POST', nonce, body)
-
-        HTTParty.post(BASE_URL + request_path, headers: header, body: body)
+        headers = generate_header(path, 'POST', nonce, body)
+        post_request(path, headers, body)
       end
 
+      # JSON.parse(Shrimpy::ApiService.get_users.body)
       def get_users
         path = '/v1/users'
         get_request(path)
       end
 
       def remove_user(uuid)
-        request_path = "/v1/users/#{uuid}"
+        path = "/v1/users/#{uuid}"
         nonce = get_nonce
-        header = generate_header(request_path, 'DELETE', nonce)
-        HTTParty.delete(BASE_URL + request_path, headers: header)
+        headers = generate_header(path, 'DELETE', nonce)
+        delete_request(path, headers)
       end
 
       def get_strategy(uuid, shrimpy_account_id)
@@ -67,17 +65,17 @@ module Shrimpy
           allocations: allocations
         }.to_json
 
-        header = generate_header(path, 'POST', nonce, body)
-        HTTParty.post(BASE_URL + path, headers: header, body: body)
+        headers = generate_header(path, 'POST', nonce, body)
+        post_request(path, headers, body)
       end
 
-      # Shrimpy::ApiService.get_balance('355dab82-3053-4d5e-948f-2d44f07b8a2d', '189128').body
+      # JSON.parse(Shrimpy::ApiService.get_balance('355dab82-3053-4d5e-948f-2d44f07b8a2d', '189128').body)
       def get_balance(uuid, shrimpy_account_id)
         path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/balance"
         get_request(path)
       end
 
-      # Shrimpy::ApiService.rebalance('355dab82-3053-4d5e-948f-2d44f07b8a2d', '189128').body
+      # JSON.parse(Shrimpy::ApiService.rebalance('355dab82-3053-4d5e-948f-2d44f07b8a2d', '189128').body)
       def rebalance(uuid, shrimpy_account_id)
         path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/rebalance"
         nonce = get_nonce
@@ -107,6 +105,26 @@ module Shrimpy
         )
       end
       
+      def post_request(path, headers, body)
+        HTTParty.post(BASE_URL + path,
+          headers: headers,
+          body: body,
+          http_proxyaddr: FIXIE.host,
+          http_proxyport: FIXIE.port,
+          http_proxyuser: FIXIE.user,
+          http_proxypass: FIXIE.password
+        )
+      end
+
+      def delete_request(path, headers)
+        HTTParty.delete(BASE_URL + path,
+          headers: headers,
+          http_proxyaddr: FIXIE.host,
+          http_proxyport: FIXIE.port,
+          http_proxyuser: FIXIE.user,
+          http_proxypass: FIXIE.password
+        )
+      end
 
       def generate_header(path, method, nonce, body = '')
         message = path + method + nonce.to_s + body
