@@ -37,6 +37,7 @@ class Transaction < ApplicationRecord
 
   # Rebalance account after 15 minutes
   def schedule_rebalance
+    Rollbar.info('schedule_rebalance RebalancerWorker')
     return unless deposit?
 
     account = ExchangeAccount.active.rebalancing.last
