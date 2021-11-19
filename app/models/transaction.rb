@@ -23,7 +23,7 @@ class Transaction < ApplicationRecord
     end
 
     event :complete, :after => :schedule_rebalance do
-      transitions from: [:pending], to: :completed
+      transitions from: [:initialized, :pending], to: :completed
     end
 
     event :wait do

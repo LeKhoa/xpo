@@ -33,7 +33,7 @@ module Coinpayments
         gateway_address: transaction.address,
         source: 'USD',
         currency: params[:currency],
-        action: 'deposit',
+        action: Transaction::ACTIONS[:deposit],
         checkout_url: transaction.checkout_url,
         status_url: transaction.status_url,
       )

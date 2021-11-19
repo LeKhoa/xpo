@@ -17,18 +17,18 @@ module Onramper
       transaction.to = payload[:wallet]
       transaction.source = payload[:inCurrency]
       transaction.currency = payload[:outCurrency]
-      transaction.action = 'deposit'
+      transaction.action = Transaction::ACTIONS[:deposit]
+      transaction.save!
 
       case params[:type]
       when 'transaction_pending'
-        transaction.status = 'pending'
+        transaction.wait! if transaction.may_wait?
       when 'transaction_failed'
-        transaction.status = 'failed'
+        transaction.fail! if transaction.may_fail?
       when 'transaction_completed'
-        transaction.status = 'completed'
+        transaction.complete! if transaction.may_complete?
       else
       end
-      transaction.save!
     rescue StandardError => e
       execute_error!(e)
     end
