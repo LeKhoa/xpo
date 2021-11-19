@@ -3,6 +3,8 @@
 module Shrimpy
   class ApiService
 
+    FIXIE = URI.parse ENV['FIXIE_URL']
+
     class << self
       BASE_URL = ENV['SHRIMPY_BASE_URL']
       API_KEY = ENV['SHRIMPY_API_KEY']
@@ -95,7 +97,14 @@ module Shrimpy
       def get_request(path)
         nonce = get_nonce
         header = generate_header(path, 'GET', nonce)
-        HTTParty.get(BASE_URL + path, headers: header)
+
+        HTTParty.get(BASE_URL + path,
+          headers: header,
+          http_proxyaddr: FIXIE.host,
+          http_proxyport: FIXIE.port,
+          http_proxyuser: FIXIE.user,
+          http_proxypass: FIXIE.password
+        )
       end
       
 
