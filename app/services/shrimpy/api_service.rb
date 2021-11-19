@@ -9,10 +9,10 @@ module Shrimpy
       SECRET_KEY = ENV['SHRIMPY_SECRET_KEY']
 
       def unlink_exchange_account(uuid, shrimpy_account_id)
-        request_path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}"
+        path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}"
         nonce = get_nonce
-        header = generate_header(request_path, 'DELETE', nonce)
-        HTTParty.delete(BASE_URL + request_path, headers: header)     
+        headers = generate_header(path, 'DELETE', nonce)
+        delete_request(path, headers)
       end
 
       def link_exchange_account(exchange, uuid, public_key, private_key)
@@ -79,8 +79,9 @@ module Shrimpy
       def rebalance(uuid, shrimpy_account_id)
         path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/rebalance"
         nonce = get_nonce
-        header = generate_header(path, 'POST', nonce)
-        HTTParty.post(BASE_URL + path, headers: header)
+        headers = generate_header(path, 'POST', nonce)
+
+        post_request(path, headers)
       end
 
       def list_accounts(uuid)
@@ -105,7 +106,7 @@ module Shrimpy
         )
       end
       
-      def post_request(path, headers, body)
+      def post_request(path, headers, body = '')
         HTTParty.post(BASE_URL + path,
           headers: headers,
           body: body,
