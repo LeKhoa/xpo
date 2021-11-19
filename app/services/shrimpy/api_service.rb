@@ -75,6 +75,22 @@ module Shrimpy
         get_request(path)
       end
 
+      def get_rebalance_period(uuid, shrimpy_account_id)
+        path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/rebalance_period"
+        get_request(path)
+      end
+
+      def set_rebalance_period(uuid, shrimpy_account_id, in_hours)
+        path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/rebalance_period"
+        nonce = get_nonce
+        body = {
+          rebalancePeriod: in_hours
+        }.to_json
+
+        headers = generate_header(path, 'POST', nonce, body)
+        post_request(path, headers, body)
+      end
+
       # JSON.parse(Shrimpy::ApiService.rebalance('355dab82-3053-4d5e-948f-2d44f07b8a2d', '189128').body)
       def rebalance(uuid, shrimpy_account_id)
         path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/rebalance"
