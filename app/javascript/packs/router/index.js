@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import Content from '../../components/home/Content.vue';
 
 import Dashboard from '../../components/dashboard/Dashboard.vue';
+import Withdraw from '../../components/dashboard/Withdraw.vue';
 import Payment from '../../components/dashboard/Payment.vue';
 import Profile from '../../components/profile/Profile.vue';
 import Support from '../../components/support/Support.vue';
@@ -24,6 +25,11 @@ const routes = [
         path: 'dashboard',
         name: 'dashboard',
         component: Dashboard,
+      },
+      {
+        path: 'withdraw',
+        name: 'withdraw',
+        component: Withdraw,
       },
       {
         path: 'profile',

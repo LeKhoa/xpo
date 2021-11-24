@@ -69,6 +69,24 @@ module Shrimpy
         post_request(path, headers, body)
       end
 
+      def create_trade(uuid, shrimpy_account_id, from_symbol, to_symbol, amount)
+        path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/trades"
+        nonce = get_nonce
+        body = {
+          fromSymbol: from_symbol,
+          toSymbol: to_symbol,
+          amount: amount
+        }.to_json
+
+        headers = generate_header(path, 'POST', nonce, body)
+        post_request(path, headers, body)
+      end
+
+      def get_trade(uuid, shrimpy_account_id, trade_id)
+        path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/trades/#{trade_id}"
+        get_request(path)
+      end
+
       # JSON.parse(Shrimpy::ApiService.get_balance('355dab82-3053-4d5e-948f-2d44f07b8a2d', '189128').body)
       def get_balance(uuid, shrimpy_account_id)
         path = "/v1/users/#{uuid}/accounts/#{shrimpy_account_id}/balance"

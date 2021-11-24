@@ -1,5 +1,5 @@
 <template>
-  <div class="profile px-3">
+  <div class="profile p-3">
     <div class="content rounded shadow bg-white">
       <div v-if="error" class="text-danger text-center pt-5"> {{error}} </div>
       <div v-if="msg" class="text-success pt-5 fw-bold text-center"> {{msg}} </div>

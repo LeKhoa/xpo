@@ -34,9 +34,7 @@ Rails.application.routes.draw do
 
     namespace :shrimpy do
       get '/rebalancing_balance', to: 'accounts#get_rebalancing_balance'
-      post '/get_exchange_accounts', to: 'accounts#get_exchange_accounts'
-      post '/add_exchange_account', to: 'accounts#add_exchange_account'
-      delete '/remove_exchange_account', to: 'accounts#remove_exchange_account'
+      post '/withdraw', to: 'accounts#withdraw'
     end
 
     resources :users

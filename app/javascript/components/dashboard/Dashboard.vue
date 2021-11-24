@@ -65,7 +65,7 @@
 
           <div v-if="error" class="text-center text-danger"> {{error}} </div>
 
-          <div class="row actions pt-4 mt-5">
+          <div class="row actions justify-content-center pt-4 mt-5">
             <div class="col-md-6 col-sm-4 col-6">
               <a v-if="paymentMethod == 'FIAT'" :href="onRamperWidgetUrl" target="_blank">
                 <button class="btn btn-md bg-purple text-white w-100"> Deposit </button>
@@ -73,9 +73,11 @@
               
               <button v-else class="btn btn-md bg-purple text-white w-100" @click="createTransaction()"> Deposit </button>
             </div>
+            <!--
             <div class="col-md-6 col-sm-4 col-6">
               <button class="btn btn-md bg-purple text-white w-100"> Widthdraw </button>
             </div>
+            -->
           </div>
         </div>
       </div>

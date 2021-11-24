@@ -12,6 +12,13 @@
 
           <router-link to="/dashboard" class="mx-2"> Dashboard </router-link>
         </li>
+        <li>
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.9622 2.27778V4.05556H11.4067V2.27778H14.9622ZM6.07332 2.27778V7.61111H2.51777V2.27778H6.07332ZM14.9622 9.38889V14.7222H11.4067V9.38889H14.9622ZM6.07332 12.9444V14.7222H2.51777V12.9444H6.07332ZM16.74 0.5H9.62888V5.83333H16.74V0.5ZM7.8511 0.5H0.73999V9.38889H7.8511V0.5ZM16.74 7.61111H9.62888V16.5H16.74V7.61111ZM7.8511 11.1667H0.73999V16.5H7.8511V11.1667Z" fill="#131031"/>
+          </svg>
+
+          <router-link to="/withdraw" class="mx-2"> Withdraw </router-link>
+        </li>
 
         <li class="mt-1">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">

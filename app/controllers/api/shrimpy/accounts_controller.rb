@@ -40,6 +40,28 @@ module Api
           balances: balances,
         }
       end
+
+
+      def withdraw
+        amount = params[:amount]
+        currency = params[:currency]
+        to_address = params[:to_address]
+        network = params[:network]
+
+        account = ExchangeAccount.rebalancing.last
+        service = Binance::WithdrawalValidationService.new(account)
+        validation = service.execute
+        return render json: { message: service.error }, status: :unprocessable_entity unless service.success?
+
+        service = Binance::WithdrawalService.new(account)
+        trade_ids = service.execute(params)
+
+        return render json: { message: service.error }, status: :unprocessable_entity unless service.success?
+
+        render json: {
+          trade_ids: trade_ids,
+        }
+      end
     end
   end
 end

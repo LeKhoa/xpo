@@ -27,6 +27,30 @@ module Shrimpy
       execute_error!(e)
     end
 
+    def get_strategy
+      response = ApiService.get_strategy(shrimpy_user.uuid, account.shrimpy_account_id)
+      return response_error!(response.body) unless response.success?
+      JSON.parse response.body
+    rescue StandardError => e
+      execute_error!(e)
+    end
+
+    def create_trate(from_symbol, to_symbol, amount)
+      response = ApiService.create_trade(shrimpy_user.uuid, account.shrimpy_account_id, from_symbol, to_symbol, amount)
+      return response_error!(response.body) unless response.success?
+      JSON.parse response.body
+    rescue StandardError => e
+      execute_error!(e)
+    end
+
+    def get_trade(trade_id)
+      response = ApiService.get_trade(shrimpy_user.uuid, account.shrimpy_account_id, trade_id)
+      return response_error!(response.body) unless response.success?
+      JSON.parse response.body
+    rescue StandardError => e
+      execute_error!(e)
+    end
+
     def rebalance
       response = ApiService.rebalance(shrimpy_user.uuid, account.shrimpy_account_id)
       return response_error!(response.body) unless response.success?
@@ -43,10 +67,11 @@ module Shrimpy
       execute_error!(e)
     end
 
-    def remove_exchange_account(shrimpy_account_id)
-      response = ApiService.unlink_exchange_account(user.shrimpy_user_id, shrimpy_account_id)
+    def remove_exchange_account
+      response = ApiService.unlink_exchange_account(shrimpy_user.uuid, account.shrimpy_account_id)
       return response_error!(response.body) unless response.success?
 
+      account.update!(status: 'inactive')
     rescue StandardError => e
       execute_error!(e)
     end

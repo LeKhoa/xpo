@@ -1,4 +1,6 @@
 class Strategy < ApplicationRecord
+  default_scope { where(active: true) }
+
   validate :allocations_valid_for_symbol_percent
 
   after_save :update_shrimpy_strategy
