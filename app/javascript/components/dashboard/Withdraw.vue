@@ -39,9 +39,10 @@
                     </svg>
                   </span>
                   <select class="form-select shadow-none rounded-0" v-model="network">
-                    <option value="BTC"> BSC </option>
+                    <option value="BTC"> BTC </option>
                     <option value="ETH"> ERC20 </option>
-                    <option value="BNB"> TRC20 </option>
+                    <option value="TRX"> TRC20 </option>
+                    <option value="BSC"> BEP20 </option>
                   </select>
                 </div>
 
