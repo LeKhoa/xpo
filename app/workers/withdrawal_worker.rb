@@ -9,7 +9,7 @@ class WithdrawalWorker
   end
 
   def perform(trade_ids, params)
-    account = ExchangeAccount.rebalancing.last
+    account = ExchangeAccount.active.rebalancing.last
     service = Shrimpy::AccountService.new(account)
 
     trade_ids.each do |trade_id|

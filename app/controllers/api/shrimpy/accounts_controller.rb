@@ -48,7 +48,7 @@ module Api
         to_address = params[:to_address]
         network = params[:network]
 
-        account = ExchangeAccount.rebalancing.last
+        account = ExchangeAccount.active.rebalancing.last
         service = Binance::WithdrawalValidationService.new(account)
         validation = service.execute
         return render json: { message: service.error }, status: :unprocessable_entity unless service.success?

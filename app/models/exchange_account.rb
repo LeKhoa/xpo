@@ -1,5 +1,4 @@
 class ExchangeAccount < ApplicationRecord
-  default_scope { where(status: 'active') }
 
   STATUS = {
     active: 'active',
