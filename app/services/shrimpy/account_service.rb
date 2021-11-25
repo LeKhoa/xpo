@@ -35,7 +35,7 @@ module Shrimpy
       execute_error!(e)
     end
 
-    def create_trate(from_symbol, to_symbol, amount)
+    def create_trade(from_symbol, to_symbol, amount)
       response = ApiService.create_trade(shrimpy_user.uuid, account.shrimpy_account_id, from_symbol, to_symbol, amount)
       return response_error!(response.body) unless response.success?
       JSON.parse response.body
@@ -63,6 +63,14 @@ module Shrimpy
       response = ApiService.get_balance(shrimpy_user.uuid, account.shrimpy_account_id)
       return response_error!(response.body) unless response.success?
       JSON.parse(response.body)['balances']
+    rescue StandardError => e
+      execute_error!(e)
+    end
+
+    def get_rebalance_period
+      response = ApiService.get_rebalance_period(shrimpy_user.uuid, account.shrimpy_account_id)
+      return response_error!(response.body) unless response.success?
+      JSON.parse(response.body)
     rescue StandardError => e
       execute_error!(e)
     end

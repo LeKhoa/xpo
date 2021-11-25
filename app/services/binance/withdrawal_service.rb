@@ -29,15 +29,43 @@ module Binance
         usd_amount =  params[:amount].to_f * allocation['percent'].to_f / 100
         from_amount = (usd_amount * balance['nativeValue'].to_f) / balance['usdValue'].to_f
 
-        trade_id = service.create_trate(symbol, params[:currency], from_amount.round(MAXIMUM_DECIMAL_PLACE))
+        trade_id = service.create_trade(symbol, params[:currency], from_amount.round(MAXIMUM_DECIMAL_PLACE))
         return error!(serice.error) unless service.success?
 
         trade_ids << trade_id
       end
-      trade_ids
+
+      error = get_trades_error(trade_ids)
+      return error!(error) if error.present?
+
+      # WithdrawalWorker.perform_in(5.minutes, trade_ids, params.to_json)
+      withdraw!(params)
+    end
+
+    def withdraw!(params)
+      Binance::Api::Account.withdraw!(
+        coin: params[:currency],
+        network: params[:network],
+        amount: params[:amount],
+        address: params[:address]
+      )
+    rescue StandardError => e
+      execute_error!(e)
     end
 
     private
+
+    def get_trades_error(trade_ids)
+      service = Shrimpy::AccountService.new(account)
+      trade_ids.each do |trade_id|
+        trade = service.get_trade(trade_id)['trade']
+
+        return service.error unless service.success?
+  
+        success = trade['status'] == 'completed' && trade['success']
+        return trade unless success
+      end
+    end
 
     def get_allocations
       service = Shrimpy::AccountService.new(account)

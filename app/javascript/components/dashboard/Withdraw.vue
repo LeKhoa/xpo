@@ -55,11 +55,19 @@
                   <input type="text" class="form-control" v-model="address">
                 </div>
 
+                <div class="row mt-3 justify-content-center" v-if="withdrawing">
+                  <div class="spinner">
+                    <div class="spinner-blade" v-for="i in 12">
+                    </div>
+                  </div>
+                  <span class="fw-bold text-center text-success"> We are evaluating your balance... </span>
+                </div>
+
                 <div v-if="error" class="text-center text-danger mt-5"> {{error}} </div>
 
                 <div class="row actions justify-content-center mt-5">
                   <div class="col-md-5 col-sm-4 col-6">
-                    <button :class="{disabled: this.withdrawing }" class="btn btn-md bg-purple text-white w-100" @click="createWithdrawal()"> Widthdraw </button>
+                    <button :class="{disabled: withdrawing }" class="btn btn-md bg-purple text-white w-100" @click="createWithdrawal()"> Widthdraw </button>
                   </div>
                 </div>
               </div>
@@ -73,11 +81,11 @@
                     <div> 
                       <span class="fw-bold symbol"> {{balance.symbol}} </span>
                     </div>
-                    <div> <span>Amount: </span><span class="fw-bold item"> {{balance.nativeValue.toFixed(4)}} </span>
+                    <div> <span>Amount: </span><span class="fw-bold item"> {{balance.nativeValue.toFixed(6)}} </span>
                     </div>
-                    <div> <span>BTC Value: </span><span class="fw-bold item"> {{balance.btcValue.toFixed(6)}}</span>
+                    <div> <span>BTC value: </span><span class="fw-bold item"> {{balance.btcValue.toFixed(6)}}</span>
                     </div>
-                    <div> <span>USD Value: </span><span class="fw-bold item"> {{balance.usdValue.toFixed(6)}}</span>
+                    <div> <span>USD value: </span><span class="fw-bold item"> {{balance.usdValue.toFixed(6)}}</span>
                     </div>
                   </div>
                 </div>
@@ -109,6 +117,7 @@ export default {
   methods: {
 
     createWithdrawal() {
+      this.error = '';
 
       if(!this.usdAmount || !this.currency || !this.network || !this.address) {
         return this.error = 'Please fill all parameters';
@@ -159,7 +168,7 @@ export default {
 .withdraw {
   .balance {
     .item {
-      color: #6A5C7B;
+      font-size: 18px;
     }
 
     .title {
@@ -172,5 +181,54 @@ export default {
       font-size: 18px;
     }
   }
+
+  $spinner-color: #69717d !default;
+
+  .devise-form {
+    border: 1px solid #ced4da;
+  }
+
+  .spinner {
+    font-size: 25px;
+    position: relative;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+  }
+
+  .spinner-blade {
+    position: absolute;
+    left: .4629em;
+    bottom: 0;
+    width: .074em;
+    height: .2777em;
+    border-radius: .5em;
+    background-color: transparent;
+    transform-origin: center -.2222em;
+    animation: spinner-fade 1s infinite linear;
+
+    $animation-delay: 0s;
+    $blade-rotation: 0deg;
+
+    @for $i from 1 through 12 {
+      &:nth-child(#{$i}) {
+        animation-delay: $animation-delay;
+        transform: rotate($blade-rotation);
+        $blade-rotation: $blade-rotation + 30;
+        $animation-delay: $animation-delay + .083;
+      }
+    }
+  }
+
+  @keyframes spinner-fade {
+    0% {
+      background-color: $spinner-color;
+    }
+
+    100% {
+      background-color: transparent;
+    }
+  }
+
 }
 </style>

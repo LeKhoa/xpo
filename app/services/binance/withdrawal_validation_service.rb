@@ -33,7 +33,7 @@ module Binance
         return error!("#{allocation['symbol']} balance is not exist") unless balance
 
         to_usd_balance = balance['usdValue']
-        return error!("#{allocation['symbol']} balance is too small, required atleast 10 USD") if to_usd_balance * allocation['percent'].to_f/100  < (MINIMUM_BALANCE_IN_USD + SLIPPAGE)
+        return error!("#{allocation['symbol']} balance is too small, required atleast #{MINIMUM_BALANCE_IN_USD + SLIPPAGE} USD") if to_usd_balance * allocation['percent'].to_f/100  < (MINIMUM_BALANCE_IN_USD + SLIPPAGE)
       end
     end
 
