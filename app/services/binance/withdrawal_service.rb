@@ -4,6 +4,9 @@ module Binance
   class WithdrawalService < BaseService
 
     MAXIMUM_DECIMAL_PLACE = 8
+    GET_TRADES_STATUS_TIME = 5
+    GET_TRADES_STATUS_SLEEP = 3
+
     attr_reader :account
 
     def initialize(account)
@@ -35,10 +38,17 @@ module Binance
         trade_ids << trade_id
       end
 
-      error = get_trades_error(trade_ids)
+      error = nil
+      GET_TRADES_STATUS_TIME.times do
+        error = get_trades_error(trade_ids)
+        break if error.nil?
+        sleep(GET_TRADES_STATUS_SLEEP)
+      end
+
       return error!(error) if error.present?
 
       # WithdrawalWorker.perform_in(5.minutes, trade_ids, params.to_json)
+      # Perform withdrawal when all trades are completed
       withdraw!(params)
     end
 
